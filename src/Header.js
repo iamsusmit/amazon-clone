@@ -6,18 +6,15 @@ import { Link } from "react-router-dom";
 import { useStateValue } from "./StateProvider";
 import { auth } from "./firebase";
 import IdleTimer from "react-idle-timer";
-import { useHistory } from "react-router-dom";
 
 function Header() {
   const [{ basket, user }, dispatch] = useStateValue();
   const idleTimerRef = useRef(null);
   const sessionTimeoutRef = useRef(null);
-  const history = useHistory();
 
   const handleAuthenticaton = () => {
     if (user) {
       auth.signOut();
-      // history.push('/login')
     }
   };
 
@@ -25,7 +22,7 @@ function Header() {
     var confirm = window.confirm(
       "You've been idle for a while! You will be logged out soon.\nDo you want to stay signed in ?"
     );
-
+console.log(confirm);
     if (confirm) {
       stayActive();
     } else {
@@ -36,7 +33,6 @@ function Header() {
   const logOut = () => {
     clearTimeout(sessionTimeoutRef.current);
     auth.signOut();
-    history.push("/login");
   };
 
   const stayActive = () => {
@@ -92,7 +88,7 @@ function Header() {
       </div>
       <div>
         {user && (
-          <IdleTimer ref={idleTimerRef} timeout={1000 * 20} onIdle={onIdle} />
+          <IdleTimer ref={idleTimerRef} timeout={1000 * 60} onIdle={onIdle} />
         )}
       </div>
     </div>
