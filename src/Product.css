@@ -34,6 +34,16 @@
   .product__price {
     margin-top: 5px;
   }
+
+  .discounted__product__price{
+    margin-top: 5px;
+    text-decoration: line-through;
+    color: red;
+  }
+
+  .remove__product__price{
+    display: none;
+  }
   
   .product__info {
     height: 100px;
