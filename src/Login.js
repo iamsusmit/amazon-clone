@@ -33,6 +33,18 @@ function Login() {
             .catch(error => alert(error.message))
     }
 
+    //restrict copy
+    const handleCopy=(e)=> {
+        e.preventDefault();  
+        alert('Copy isn\'t allowed here!');
+      }
+
+    //restrict paste
+    const handlePaste=(e)=> {
+        e.preventDefault();  
+        alert('You can\'t paste here!');
+      }
+
     return (
         <div className='login'>
             <Link to='/'>
@@ -47,10 +59,10 @@ function Login() {
 
                 <form>
                     <h5>E-mail</h5>
-                    <input type='text' value={email} onChange={e => setEmail(e.target.value)} />
+                    <input type='text' value={email} onChange={e => setEmail(e.target.value)} onCopy={handleCopy} />
 
                     <h5>Password</h5>
-                    <input type='password' value={password} onChange={e => setPassword(e.target.value)} />
+                    <input type='password' value={password} onChange={e => setPassword(e.target.value)} onCopy={handleCopy} onPaste={handlePaste} />
 
                     <button type='submit' onClick={signIn} className='login__signInButton'>Sign In</button>
                 </form>
