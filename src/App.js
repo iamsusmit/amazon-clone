@@ -20,7 +20,10 @@ function App() {
   const [{}, dispatch] = useStateValue();
 
   useEffect(() => {
-    // will only run once when the app component loads...
+    //Ask for confirmation before every refresh/reload/closing of page
+    window.addEventListener("beforeunload", function(e) {
+      e.returnValue = ""; //works fine with Chrome
+    });
 
     auth.onAuthStateChanged((authUser) => {
       console.log("THE USER IS >>> ", authUser);
